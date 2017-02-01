@@ -2,4 +2,6 @@
     <string name="app_name">Umpire Buddy</string>
     <string name="reset">Reset</string>
     <string name="about">About</string>
+    <string name="about_heading">Umpire Buddy by James Rinella</string>
+    <string name="about_content">v1.0: tracks count for an at bat\nv2.1: reset button added\nv2.2: about activity added</string>
 </resources>

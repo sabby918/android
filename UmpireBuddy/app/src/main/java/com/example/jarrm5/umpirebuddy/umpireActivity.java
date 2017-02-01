@@ -1,6 +1,7 @@
 package com.example.jarrm5.umpirebuddy;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -84,7 +85,11 @@ public class umpireActivity extends AppCompatActivity {
                 show_balls_strikes();
                 return true;
             case R.id.menu_item_about:
-                Toast.makeText(umpireActivity.this, "About", Toast.LENGTH_SHORT).show();
+
+
+                //Launch a new activity
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
