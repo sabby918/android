@@ -1,5 +1,6 @@
 package com.example.jarrm5.umpirebuddy;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -19,6 +20,9 @@ public class umpireActivity extends AppCompatActivity {
     private TextView mBallTextView;
     private Button mStrikeButton;
     private Button mBallButton;
+
+    private TextView mAbout_Main;
+    private TextView mAbout_Content;
 
     private AtBat ab;
 
@@ -78,18 +82,20 @@ public class umpireActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        int id = item.getItemId();
+
+        switch(id){
             case R.id.menu_item_reset:
-                Toast.makeText(umpireActivity.this, "Reset", Toast.LENGTH_SHORT).show();
+                Toast.makeText(umpireActivity.this, "Count reset", Toast.LENGTH_SHORT).show();
                 ab = new AtBat();
                 show_balls_strikes();
                 return true;
             case R.id.menu_item_about:
 
-
                 //Launch a new activity
                 Intent intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

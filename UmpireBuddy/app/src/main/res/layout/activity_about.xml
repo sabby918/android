@@ -2,21 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    android:gravity="center"
+    android:orientation="vertical" >
     <TextView
         android:id="@+id/about_main_text_view"
-        android:layout_width="400dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:padding="24dp"
         android:layout_gravity="center_horizontal"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:text = "@string/about_heading"/>
     <TextView
         android:id="@+id/about_content_text_view"
-        android:layout_width="400dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:padding="24dp"
         android:layout_gravity="center_horizontal"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:text = "@string/about_content"/>
 
 </LinearLayout>
