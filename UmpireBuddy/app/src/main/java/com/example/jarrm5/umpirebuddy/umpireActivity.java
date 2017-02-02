@@ -18,6 +18,7 @@ public class umpireActivity extends AppCompatActivity {
 
     private TextView mStrikeTextView;
     private TextView mBallTextView;
+    private TextView mOutTextView;
     private Button mStrikeButton;
     private Button mBallButton;
 
@@ -25,6 +26,7 @@ public class umpireActivity extends AppCompatActivity {
     private TextView mAbout_Content;
 
     private AtBat ab;
+    private int outCount;
 
     public void dialog(CharSequence title){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -36,6 +38,10 @@ public class umpireActivity extends AppCompatActivity {
         mStrikeTextView.setText("Strike: " + ab.getStrikes());
         mBallTextView.setText("Ball: " + ab.getBalls());
     }
+    public void show_outs(){
+        outCount++;
+        mOutTextView.setText("Total outs: " + outCount);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +49,12 @@ public class umpireActivity extends AppCompatActivity {
         setContentView(R.layout.activity_umpire);
         mStrikeTextView = (TextView)findViewById(R.id.strike_text_view);
         mBallTextView = (TextView)findViewById(R.id.ball_text_view);
+        mOutTextView = (TextView)findViewById(R.id.out_count_text_view);
         mStrikeButton = (Button)findViewById(R.id.strike_button);
         mBallButton = (Button)findViewById(R.id.ball_button);
 
         ab = new AtBat();
+        outCount = 0;
 
         mStrikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +63,7 @@ public class umpireActivity extends AppCompatActivity {
                 if (ab.isOut()){
                     dialog("Out!");
                     ab = new AtBat();
+                    show_outs();
                 }
                 show_balls_strikes();
             }
