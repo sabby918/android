@@ -1,9 +1,7 @@
 package com.example.jarrm5.gymapp;
 
-import android.content.ClipData;
-import android.content.Context;
+import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,12 +10,27 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText mAddWorkout;
+
+    public class CustomClickListener implements View.OnClickListener {
+
+        private final Dialog dialog;
+
+        CustomClickListener(Dialog dialog) {
+            this.dialog = dialog;
+        }
+
+        @Override
+        public void onClick(View v) {
+            String test = v.findViewById(R.id.workout_name_input).toString();
+            String editTextValue= mAddWorkout.getText().toString();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,30 +50,32 @@ public class MainActivity extends AppCompatActivity {
     //Clicking add workout button in the action bar
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        //Create the user input xml file into a java object; capturing the user input from the dialog box
-        //inflate means "fill"
-        View view = LayoutInflater.from(MainActivity.this)
-                .inflate(R.layout.userinput, null);
-        final EditText mAddWorkout = (EditText)view.findViewById(R.id.workout_name_input);
+        switch(item.getItemId()){
+            case R.id.action_add_workout:
+                //final EditText mAddWorkout = (EditText)R.layout.userinput;
 
-        //Creating the dialog box for entering the workout name
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter the workout name");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String name = mAddWorkout.getText().toString();
-                boolean brkpt = true;
-            }
-        }); //Second parameter pass in which event listener should trigger when the button is clicked
-        builder.setNegativeButton("Cancel",null);
-        builder.setView(R.layout.userinput);
-        builder.show();
+                //Creating the dialog box for entering the workout name
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Enter the workout name");
 
+                //Create the user input xml file into a java object; capturing the user input from the dialog box
+                //inflate means "fill"
+                View view = LayoutInflater.from(this).inflate(R.layout.userinput,null);
+                mAddWorkout = (EditText)view.findViewById(R.id.workout_name_input);
 
-        return true;
+                builder.setView(R.layout.userinput);
+                builder.setPositiveButton("OK",null);
+                builder.setNegativeButton("Cancel",null);
 
+                AlertDialog alertDialog = builder.create();
+                Button saveWorkout = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                saveWorkout.setOnClickListener(new CustomClickListener(alertDialog));
+                alertDialog.show();
 
+                return true;
 
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
