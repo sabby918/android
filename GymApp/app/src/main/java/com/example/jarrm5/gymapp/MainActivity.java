@@ -1,49 +1,33 @@
 package com.example.jarrm5.gymapp;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText mAddWorkout;
-
-    public class CustomClickListener implements View.OnClickListener {
-
-        private final Dialog dialog;
-
-        CustomClickListener(Dialog dialog) {
-            this.dialog = dialog;
-        }
-
-        @Override
-        public void onClick(View v) {
-            String test = v.findViewById(R.id.workout_name_input).toString();
-            String editTextValue= mAddWorkout.getText().toString();
-        }
-    }
+    DatabaseHelper myDb;
+    private String mWorkoutName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        myDb = new DatabaseHelper(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu,menu);
-        return super.onCreateOptionsMenu(menu);
+        //return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
@@ -52,25 +36,35 @@ public class MainActivity extends AppCompatActivity {
 
         switch(item.getItemId()){
             case R.id.action_add_workout:
-                //final EditText mAddWorkout = (EditText)R.layout.userinput;
 
                 //Creating the dialog box for entering the workout name
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Enter the workout name");
 
-                //Create the user input xml file into a java object; capturing the user input from the dialog box
-                //inflate means "fill"
-                View view = LayoutInflater.from(this).inflate(R.layout.userinput,null);
-                mAddWorkout = (EditText)view.findViewById(R.id.workout_name_input);
+                final EditText input = new EditText(this);
 
-                builder.setView(R.layout.userinput);
-                builder.setPositiveButton("OK",null);
-                builder.setNegativeButton("Cancel",null);
+                builder.setTitle("Enter the workout name").setView(input).setView(input);
 
-                AlertDialog alertDialog = builder.create();
-                Button saveWorkout = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                saveWorkout.setOnClickListener(new CustomClickListener(alertDialog));
-                alertDialog.show();
+                builder.setPositiveButton("OK",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mWorkoutName = input.getText().toString();
+                        boolean isInserted = myDb.insertData(mWorkoutName);
+                        if (isInserted){
+                            Toast.makeText(MainActivity.this,"Success!",Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this,"Failed to Insert!",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+                builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
 
                 return true;
 
