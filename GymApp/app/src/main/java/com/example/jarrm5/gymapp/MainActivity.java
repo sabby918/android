@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mWorkoutName = input.getText().toString();
-                        boolean isInserted = myDb.insertData(mWorkoutName);
+                        boolean isInserted = myDb.insertWorkout(mWorkoutName);
                         if (isInserted){
                             Toast.makeText(MainActivity.this,"Success!",Toast.LENGTH_LONG).show();
                         }
