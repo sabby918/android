@@ -95,3 +95,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.insert(TABLE_WORKOUT,null,contentValues);
     }
 }
+
+////////////////////////////////////////edits by sarah/////////////////////////////////////////////////////////
