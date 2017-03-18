@@ -10,6 +10,10 @@ public class Workout {
 
     public Workout() {}
 
+    public Workout(String wktName) {
+        this.wktName = wktName;
+    }
+
     public Workout(int wktId, String wktName) {
         this.wktId = wktId;
         this.wktName = wktName;

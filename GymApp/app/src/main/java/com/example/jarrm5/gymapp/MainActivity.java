@@ -47,14 +47,9 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mWorkoutName = input.getText().toString();
-                        boolean isInserted = myDb.insertWorkout(mWorkoutName);
-                        if (isInserted){
-                            Toast.makeText(MainActivity.this,"Success!",Toast.LENGTH_LONG).show();
-                        }
-                        else{
-                            Toast.makeText(MainActivity.this,"Failed to Insert!",Toast.LENGTH_LONG).show();
-                        }
+                        //mWorkoutName = input.getText().toString();
+                        Workout workout = new Workout(input.getText().toString());
+                        long workout_key = myDb.createWorkout(workout);
                     }
                 });
                 builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {

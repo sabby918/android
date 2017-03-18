@@ -65,6 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //create the tables if the db doesnt exist
         db.execSQL(CREATE_TABLE_WORKOUT);
         db.execSQL(CREATE_TABLE_EXERCISE);
         db.execSQL(CREATE_TABLE_SET);
@@ -72,17 +73,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        //onUpgrade, drop older tables
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_WORKOUT);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_EXERCISE);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_SET);
         onCreate(db);
     }
 
-    public boolean insertWorkout(String name){
+    /*public boolean insertWorkout(String name){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(WORKOUT_NAME,name);
         long result = db.insert(TABLE_WORKOUT,null,contentValues);
         return result == -1 ? false:true;
+    }*/
+
+    public long createWorkout(Workout workout){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(WORKOUT_NAME,workout.getWktName());
+        return db.insert(TABLE_WORKOUT,null,contentValues);
     }
 }
