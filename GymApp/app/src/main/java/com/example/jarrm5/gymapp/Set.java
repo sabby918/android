@@ -11,9 +11,11 @@ public class Set {
     private int weight;
     private int reps;
     private Date progDate; //Idk if this is the right datatype, sql may not take it
+    /////////////////// im not sure either, but i feel that ive seen it being used before///////////
     private int exerId;
 
     public Set(){}
+    //////////// is this necessary - wonderng like the workout function//////////////////
 
     public Set(int setId, int weight, int reps, Date progDate, int exerId) {
         this.setId = setId;
