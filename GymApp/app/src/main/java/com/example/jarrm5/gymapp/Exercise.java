@@ -10,6 +10,7 @@ public class Exercise {
     private int wktId;
 
     public Exercise() {}
+    ////////////////what is the purpose of having Exercise() without any parameters? will that ever be invoked?////////////////
 
     public Exercise(int exerId, String exerName, int wktId) {
         this.exerId = exerId;
