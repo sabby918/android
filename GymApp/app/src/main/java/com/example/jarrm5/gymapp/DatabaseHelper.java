@@ -35,6 +35,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String SET_REPS = "reps";
     private static final String SET_DATE = "progDate";
     private static final String FKEY_EXERCISE_ID = "exerId";
+    
+    /////////////////////////very consistent naming - easy to follow/////////////////////////
 
     //TABLE CREATE STATEMENTS
 
@@ -87,6 +89,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.insert(TABLE_WORKOUT,null,contentValues);
         return result == -1 ? false:true;
     }*/
+    
+    ///////////////////////////assuming that this code isnt finished, is there an issue with insertWorkout?/////////////////////
 
     public long createWorkout(Workout workout){
         SQLiteDatabase db = this.getWritableDatabase();
