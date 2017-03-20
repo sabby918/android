@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu,menu);
+        ////////////////////////////////////////////is this supposed to be edited out?//////////////////////////////////////
         //return super.onCreateOptionsMenu(menu);
         return true;
     }
@@ -68,3 +69,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+
+
+
+////////////////////////////////////////edits by sarah/////////////////////////////////////////////////////////
